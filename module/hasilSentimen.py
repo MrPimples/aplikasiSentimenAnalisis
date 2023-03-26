@@ -3,13 +3,10 @@ import pandas as pd
 import pickle
 
 from bs4 import BeautifulSoup
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from tqdm.auto import tqdm
 from gensim.utils import tokenize
-from gensim.models import Word2Vec, KeyedVectors
+from gensim.models import Word2Vec
 
 # List Side Function #
 def parseHtml(html):

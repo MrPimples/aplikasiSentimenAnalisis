@@ -2,6 +2,8 @@ import streamlit as st
 import time
 import module.hasilModel as hm
 
+st.set_page_config(page_title="Halaman Model")
+
 st.title("🎭Halaman Hasil Model")
 st.write("Halaman ini berfungsi untuk menampilkan hasil validasi dari model yang telah dibuat dan yang digunakan pada halaman sentimen."
          " Parameter validasi untuk modelnya berupa Accuracy, Precision, Recall dan F-Score")

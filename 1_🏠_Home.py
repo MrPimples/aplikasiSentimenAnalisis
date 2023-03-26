@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+st.set_page_config(page_title="Aplikasi Sentimen Analisis", page_icon="🎭")
+
 st.title("🎭Aplikasi Sentimen Analisis Bakal Calon Presiden Indonesia 2024")
 
 st.markdown(

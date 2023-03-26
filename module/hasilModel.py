@@ -2,8 +2,6 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-import time
-
 from bs4 import BeautifulSoup
 
 from gensim.models import Word2Vec

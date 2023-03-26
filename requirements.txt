@@ -1,6 +1,7 @@
 bs4
 gensim
 pandas
+plotly
 Sastrawi
 scikit-learn
 streamlit

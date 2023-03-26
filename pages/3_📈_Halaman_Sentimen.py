@@ -1,11 +1,9 @@
 import streamlit as st
-import time
 import pandas as pd
-import numpy as np
 import module.hasilSentimen as hs
+import plotly.express as px
 
-
-st.set_page_config(page_title="Plotting Demo", page_icon="📈")
+st.set_page_config(page_title="Halaman Sentimen", page_icon="📈")
 
 st.title("📈Halaman Sentimen")
 st.write(
@@ -16,6 +14,7 @@ st.write(
 
 namaCalon = ['Agus Harimurti Yudhono', 'Anies Baswedan', 'Ganjar Pranowo', 'Prabowo Subianto', 'Puan Maharani', 'Ridwan Kamil']
 listBulan = ['Desember 2022', 'Januari 2023', 'Februari 2023']
+kolomChart = ['Minggu']
 
 # pilihanCalon1 = st.selectbox('Pilih Nama Calon 1', namaCalon)
 # pilihanCalon2 = st.selectbox('Pilih Nama Calon 2', namaCalon)
@@ -28,14 +27,14 @@ if st.button('Lihat Sentimen'):
     with st.spinner('Wait for it...'):
         hasil = hs.tampilSentimen(pilihanCalon,pilihanBulan)
     tab1, tab2, tab3 = st.tabs(["📈Grafik Garis", "📊Grafik Batang",'📅Tabel Hasil'])
-    pilihanCalon.insert(0, 'Minggu')
+    kolomChart.extend(pilihanCalon)
     with tab1:
         st.title('Grafik Garis')
         dataPolaritas = hasil
 
         chart_data = pd.DataFrame(
             dataPolaritas,
-            columns=pilihanCalon)
+            columns=kolomChart)
 
         st.line_chart(chart_data,x='Minggu')
     with tab2:
@@ -44,16 +43,17 @@ if st.button('Lihat Sentimen'):
 
         chart_data = pd.DataFrame(
             dataPolaritas,
-            columns=pilihanCalon)
+            columns=kolomChart)
 
-        st.bar_chart(chart_data,x='Minggu')
+        fig = px.bar(chart_data, x="Minggu", y=pilihanCalon, barmode='group', height=400)
+
+        st.plotly_chart(fig)
     with tab3:
         st.title('Tabel Hasil')
         df = pd.DataFrame(
             dataPolaritas,
-            columns=pilihanCalon)
+            columns=kolomChart)
     
-        # CSS to inject contained in a string
         hide_table_row_index = """
                     <style>
                     thead tr th:first-child {display:none}
@@ -61,7 +61,6 @@ if st.button('Lihat Sentimen'):
                     </style>
                     """
 
-        # Inject CSS with Markdown
         st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
         # Display a static table
