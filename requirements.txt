@@ -2,6 +2,6 @@ bs4
 gensim
 pandas
 Sastrawi
-sklearn
+scikit-learn
 streamlit
 tqdm
