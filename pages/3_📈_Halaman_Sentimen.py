@@ -24,12 +24,13 @@ pilihanCalon = st.multiselect('Pilih Nama Bakal Calon', namaCalon)
 pilihanBulan = st.selectbox('Pilih Waktu yang akan ditampilkan', listBulan)
 
 if st.button('Lihat Sentimen'):
-    with st.spinner('Wait for it...'):
+    with st.spinner('Sedang memproses....'):
         hasil = hs.tampilSentimen(pilihanCalon,pilihanBulan)
     tab1, tab2, tab3 = st.tabs(["📈Grafik Garis", "📊Grafik Batang",'📅Tabel Hasil'])
     kolomChart.extend(pilihanCalon)
     with tab1:
-        st.title('Grafik Garis')
+        st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik garis dari tiap bakal calon dengan rentang nilai 0-1000")
+        st.write('#### Hasil Sentimen Bulan', pilihanBulan)
         dataPolaritas = hasil
 
         chart_data = pd.DataFrame(
@@ -38,7 +39,8 @@ if st.button('Lihat Sentimen'):
 
         st.line_chart(chart_data,x='Minggu')
     with tab2:
-        st.title('Grafik Batang')
+        st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik batang dari tiap bakal calon dengan rentang nilai 0-1000")
+        st.write('#### Hasil Sentimen Bulan', pilihanBulan)
         dataPolaritas = hasil
 
         chart_data = pd.DataFrame(
@@ -49,7 +51,8 @@ if st.button('Lihat Sentimen'):
 
         st.plotly_chart(fig)
     with tab3:
-        st.title('Tabel Hasil')
+        st.write("Tab ini menampilkan total sentimen positif dalam bentuk tabel dari tiap bakal calon dengan rentang nilai 0-1000")
+        st.write('#### Hasil Sentimen Bulan', pilihanBulan)
         df = pd.DataFrame(
             dataPolaritas,
             columns=kolomChart)
