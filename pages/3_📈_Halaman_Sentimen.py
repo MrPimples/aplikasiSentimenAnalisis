@@ -16,55 +16,53 @@ namaCalon = ['Agus Harimurti Yudhono', 'Anies Baswedan', 'Ganjar Pranowo', 'Prab
 listBulan = ['Desember 2022', 'Januari 2023', 'Februari 2023']
 kolomChart = ['Minggu']
 
-# pilihanCalon1 = st.selectbox('Pilih Nama Calon 1', namaCalon)
-# pilihanCalon2 = st.selectbox('Pilih Nama Calon 2', namaCalon)
-
 pilihanCalon = st.multiselect('Pilih Nama Bakal Calon', namaCalon)
 
 pilihanBulan = st.selectbox('Pilih Waktu yang akan ditampilkan', listBulan)
 
-if st.button('Lihat Sentimen'):
-    with st.spinner('Sedang memproses....'):
-        hasil = hs.tampilSentimen(pilihanCalon,pilihanBulan)
-    tab1, tab2, tab3 = st.tabs(["📈Grafik Garis", "📊Grafik Batang",'📅Tabel Hasil'])
-    kolomChart.extend(pilihanCalon)
-    with tab1:
-        st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik garis dari tiap bakal calon dengan rentang nilai 0-1000")
-        st.write('#### Hasil Sentimen Bulan', pilihanBulan)
-        dataPolaritas = hasil
+if(len(pilihanCalon) > 0):
+    if st.button('Lihat Sentimen'):
+        with st.spinner('Sedang memproses....'):
+            hasil = hs.tampilSentimen(pilihanCalon,pilihanBulan)
+        tab1, tab2, tab3 = st.tabs(["📈Grafik Garis", "📊Grafik Batang",'📅Tabel Hasil'])
+        kolomChart.extend(pilihanCalon)
+        with tab1:
+            st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik garis dari tiap bakal calon dengan rentang nilai 0-1000")
+            st.write('#### Hasil Sentimen Bulan', pilihanBulan)
+            dataPolaritas = hasil
 
-        chart_data = pd.DataFrame(
-            dataPolaritas,
-            columns=kolomChart)
+            chart_data = pd.DataFrame(
+                dataPolaritas,
+                columns=kolomChart)
 
-        st.line_chart(chart_data,x='Minggu')
-    with tab2:
-        st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik batang dari tiap bakal calon dengan rentang nilai 0-1000")
-        st.write('#### Hasil Sentimen Bulan', pilihanBulan)
-        dataPolaritas = hasil
+            st.line_chart(chart_data,x='Minggu')
+        with tab2:
+            st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik batang dari tiap bakal calon dengan rentang nilai 0-1000")
+            st.write('#### Hasil Sentimen Bulan', pilihanBulan)
+            dataPolaritas = hasil
 
-        chart_data = pd.DataFrame(
-            dataPolaritas,
-            columns=kolomChart)
+            chart_data = pd.DataFrame(
+                dataPolaritas,
+                columns=kolomChart)
 
-        fig = px.bar(chart_data, x="Minggu", y=pilihanCalon, barmode='group', height=400)
+            fig = px.bar(chart_data, x="Minggu", y=pilihanCalon, barmode='group', height=400)
 
-        st.plotly_chart(fig)
-    with tab3:
-        st.write("Tab ini menampilkan total sentimen positif dalam bentuk tabel dari tiap bakal calon dengan rentang nilai 0-1000")
-        st.write('#### Hasil Sentimen Bulan', pilihanBulan)
-        df = pd.DataFrame(
-            dataPolaritas,
-            columns=kolomChart)
-    
-        hide_table_row_index = """
-                    <style>
-                    thead tr th:first-child {display:none}
-                    tbody th {display:none}
-                    </style>
-                    """
+            st.plotly_chart(fig)
+        with tab3:
+            st.write("Tab ini menampilkan total sentimen positif dalam bentuk tabel dari tiap bakal calon dengan rentang nilai 0-1000")
+            st.write('#### Hasil Sentimen Bulan', pilihanBulan)
+            df = pd.DataFrame(
+                dataPolaritas,
+                columns=kolomChart)
+        
+            hide_table_row_index = """
+                        <style>
+                        thead tr th:first-child {display:none}
+                        tbody th {display:none}
+                        </style>
+                        """
 
-        st.markdown(hide_table_row_index, unsafe_allow_html=True)
+            st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
-        # Display a static table
-        st.table(df)
+            # Display a static table
+            st.table(df)
