@@ -55,10 +55,10 @@ def hasilModel():
     testTweets=tokenizedText[3216:]
     testPolaritas=polaritas[3216:]
     
-    model = Word2Vec.load('src/Vector/train_model_capres.w2v')
+    model = Word2Vec(tokenizedText, vector_size=100, window=5, min_count=1, workers=1, epochs=3000)
 
     def getVectors(dataset):
-        singleDataItemEmbedding=np.zeros(128)
+        singleDataItemEmbedding=np.zeros(100)
         vectors=[]
         for dataItem in dataset:
             wordCount=0
