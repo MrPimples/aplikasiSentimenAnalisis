@@ -58,7 +58,7 @@ def hasilModel():
     model = Word2Vec.load('src/Vector/train_model_capres.w2v')
 
     def getVectors(dataset):
-        singleDataItemEmbedding=np.zeros(100)
+        singleDataItemEmbedding=np.zeros(128)
         vectors=[]
         for dataItem in dataset:
             wordCount=0
