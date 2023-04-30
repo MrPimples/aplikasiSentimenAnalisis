@@ -77,6 +77,9 @@ def prosesSentimen(namaCalon, bulan):
             
             testTweetVectors=getVectors(tokenizedText)
             
+            ar_inf = np.where(np.isinf(testTweetVectors))
+            print (ar_inf)
+            
             loadedModel = pickle.load(open("src/modelTrainedNB.pkl", "rb"))
 
             result = loadedModel.predict(testTweetVectors)
