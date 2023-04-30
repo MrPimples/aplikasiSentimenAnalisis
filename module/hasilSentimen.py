@@ -56,6 +56,8 @@ def prosesSentimen(namaCalon, bulan):
             tokenizedText=[list(tokenize(item.lower())) for item in tweet]
             
             model = []
+            
+            print(directoryVector)
 
             model = Word2Vec.load(directoryVector)
             
