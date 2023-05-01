@@ -57,7 +57,10 @@ def prosesSentimen(namaCalon, bulan):
             
             model = []
             
-            model = Word2Vec(tokenizedText, vector_size=128, window=5, min_count=1, workers=1, epochs=300)
+            if(namaCalon[nama] == 'Puan' and bulan == 'Februari'):
+                model = Word2Vec(tokenizedText, vector_size=128, window=5, min_count=1, workers=1, epochs=300)
+            else:
+                model = Word2Vec.load(directoryVector)
             
             def getVectors(dataset):
                 singleDataItemEmbedding=np.zeros(128)
