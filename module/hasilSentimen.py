@@ -57,9 +57,7 @@ def prosesSentimen(namaCalon, bulan):
             
             model = []
             
-            print(directoryVector)
-
-            model = Word2Vec.load(directoryVector)
+            model = Word2Vec(tokenizedText, vector_size=128, window=5, min_count=1, workers=1, epochs=300)
             
             def getVectors(dataset):
                 singleDataItemEmbedding=np.zeros(128)
@@ -77,8 +75,7 @@ def prosesSentimen(namaCalon, bulan):
             
             testTweetVectors=getVectors(tokenizedText)
             
-            ar_inf = np.where(np.isinf(testTweetVectors))
-            print (ar_inf)
+            print(testTweetVectors[999])
             
             loadedModel = pickle.load(open("src/modelTrainedNB.pkl", "rb"))
 
