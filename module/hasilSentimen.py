@@ -58,7 +58,7 @@ def prosesSentimen(namaCalon, bulan):
             model = []
             
             if(namaCalon[nama] == 'Puan' and bulan == 'Februari'):
-                model = Word2Vec(tokenizedText, vector_size=128, window=5, min_count=1, workers=1, epochs=300)
+                model = Word2Vec(tokenizedText, vector_size=128, window=5, min_count=1, workers=1, epochs=100)
             else:
                 model = Word2Vec.load(directoryVector)
             
@@ -77,8 +77,6 @@ def prosesSentimen(namaCalon, bulan):
                 return vectors
             
             testTweetVectors=getVectors(tokenizedText)
-            
-            print(testTweetVectors[999])
             
             loadedModel = pickle.load(open("src/modelTrainedNB.pkl", "rb"))
 
