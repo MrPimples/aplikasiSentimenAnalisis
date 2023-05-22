@@ -26,34 +26,28 @@ if(len(pilihanCalon) > 0):
             hasil = hs.tampilSentimen(pilihanCalon,pilihanBulan)
         tab1, tab2, tab3 = st.tabs(["📈Grafik Garis", "📊Grafik Batang",'📅Tabel Hasil'])
         kolomChart.extend(pilihanCalon)
+        
+        dataPolaritas = hasil
+
+        dataTampil = pd.DataFrame(
+            dataPolaritas,
+            columns=kolomChart)
+        
         with tab1:
-            st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik garis dari tiap bakal calon dengan rentang nilai 0-1000")
+            st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik garis dari tiap bakal calon dengan rentang nilai 0-1000 dan menggunakan model dengan tingkat kepercayaan atau accuracy sebesar 98.25%")
             st.write('#### Hasil Sentimen Bulan', pilihanBulan)
-            dataPolaritas = hasil
-
-            chart_data = pd.DataFrame(
-                dataPolaritas,
-                columns=kolomChart)
-
-            st.line_chart(chart_data,x='Minggu')
+            
+            st.line_chart(dataTampil,x='Minggu')
         with tab2:
-            st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik batang dari tiap bakal calon dengan rentang nilai 0-1000")
+            st.write("Tab ini menampilkan total sentimen positif dalam bentuk grafik batang dari tiap bakal calon dengan rentang nilai 0-1000 dan menggunakan model dengan tingkat kepercayaan atau accuracy sebesar 98.25%")
             st.write('#### Hasil Sentimen Bulan', pilihanBulan)
-            dataPolaritas = hasil
 
-            chart_data = pd.DataFrame(
-                dataPolaritas,
-                columns=kolomChart)
-
-            fig = px.bar(chart_data, x="Minggu", y=pilihanCalon, barmode='group', height=400)
+            fig = px.bar(dataTampil, x="Minggu", y=pilihanCalon, barmode='group', height=400)
 
             st.plotly_chart(fig)
         with tab3:
-            st.write("Tab ini menampilkan total sentimen positif dalam bentuk tabel dari tiap bakal calon dengan rentang nilai 0-1000")
+            st.write("Tab ini menampilkan total sentimen positif dalam bentuk tabel dari tiap bakal calon dengan rentang nilai 0-1000 dan menggunakan model dengan tingkat kepercayaan atau accuracy sebesar 98.25%")
             st.write('#### Hasil Sentimen Bulan', pilihanBulan)
-            df = pd.DataFrame(
-                dataPolaritas,
-                columns=kolomChart)
         
             hide_table_row_index = """
                         <style>
@@ -64,5 +58,4 @@ if(len(pilihanCalon) > 0):
 
             st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
-            # Display a static table
-            st.table(df)
+            st.table(dataTampil)
